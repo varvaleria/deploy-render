@@ -50,3 +50,21 @@ def analisi_testo(testo):
 
     print(f"La lingua rilevata è: {lingua}")
     return "La lingua rilevata è: " + lingua 
+
+
+from textblob import TextBlob
+
+@app.get("/frase")
+def analisi_frase(frase: str):
+
+    blob = TextBlob(frase)
+    sentiment = blob.sentiment.polarity
+
+    if sentiment > 0:
+        sentiment = "Positivo"
+    elif sentiment < 0:
+        sentiment = "Negativo"
+    else: 
+        sentiment = "Neutro"
+    return "Il sentiment della frase è " + str(sentiment)
+
